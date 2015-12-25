@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="HistoryLog">
+  <DataContextMoniker Name="/HistoryLogDataContext" />
+  <nestedChildShapes>
+    <classShape Id="f6644f2e-da0f-48d8-bdf8-3e0ee2efff34" absoluteBounds="6.25, 1.375, 2, 1.0961531575520835">
+      <DataClassMoniker Name="/HistoryLogDataContext/ItemExtraIp" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b0ecbeee-078c-4352-ac19-e6256a1e5ba7" absoluteBounds="6.265, 1.835, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ae9589dc-c114-45d9-9b37-47051210ed4b" absoluteBounds="3.5, 0.875, 2, 1.9178898111979166">
+      <DataClassMoniker Name="/HistoryLogDataContext/Item" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0ebab4d9-a570-4113-b22c-e6faea2668bb" absoluteBounds="3.515, 1.335, 1.9700000000000002, 1.3578898111979165" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.5 : 1.92307657877604); (6.25 : 1.92307657877604)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/HistoryLogDataContext/Item/Item_ItemExtraIp" />
+      <nodes>
+        <classShapeMoniker Id="ae9589dc-c114-45d9-9b37-47051210ed4b" />
+        <classShapeMoniker Id="f6644f2e-da0f-48d8-bdf8-3e0ee2efff34" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="674e712e-9afa-4521-b5a4-a351fdaeb3a8" absoluteBounds="0.875, 1.25, 2, 1.26050048828125">
+      <DataClassMoniker Name="/HistoryLogDataContext/Event" />
+      <nestedChildShapes>
+        <elementListCompartment Id="cd4c7421-b056-4011-af44-01cd2eb64599" absoluteBounds="0.89000000000000012, 1.71, 1.9700000000000002, 0.70050048828125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.875 : 1.88025024414063); (3.5 : 1.88025024414063)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/HistoryLogDataContext/Event/Event_Item" />
+      <nodes>
+        <classShapeMoniker Id="674e712e-9afa-4521-b5a4-a351fdaeb3a8" />
+        <classShapeMoniker Id="ae9589dc-c114-45d9-9b37-47051210ed4b" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

@@ -1,0 +1,50 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>Denied Mail</title>
+</head>
+<body>
+    <div style="font-family: Tahoma, Monospace; font-size: 8pt;">
+        This message indicates that the
+        <%= Application%>
+        application has detected denial-of-service attack. The
+        matching condition was <b>
+            <%= ErrorRate%></b> errors during <b>
+                <%= ThrottlePeriod%></b>. The following hosts <b>
+                    <%= Hosts%></b> have been blocked with http
+        forbidden response for <b>
+            <%= BlockPeriod%></b> until
+        <%= BlockExpiresAt%>.
+        <br />
+        <br />
+        Please report this detection to network admin for further
+        actions.
+        <br />
+        <br />
+        A denial-of-service attack (DoS attack) is an attempt to
+        make a computer resource unavailable to its intended users.
+        Although the means to carry out, motives for, and targets
+        of a DoS attack may vary, it generally consists of the
+        concerted efforts of a person or people to prevent an site
+        or service from functioning efficiently or at all, temporarily
+        or indefinitely.
+        <br />
+        <br />
+        Please do not reply to this e-mail.<br />
+        <br />
+        <%= Application%>
+        Agent<br />
+        <br />
+        <hr style="color: navy;" />
+        Submitted at
+        <%= DateSubmitted%>
+        <br />
+        <br />
+        <p style="font-size: 12pt; font-weight: bold; color: White;
+            background-color: #90ee90; width: 99%; padding: 15px 5px 15px 5px;">
+            Host Environment:
+            <%= HostEnvironment%>
+        </p>
+    </div>
+</body>
+</html>

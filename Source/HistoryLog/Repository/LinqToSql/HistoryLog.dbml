@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="HistoryLog" EntityNamespace="ReusableLibrary.HistoryLog.Repository.LinqToSql.Entities" Class="HistoryLogDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="ConnectionString" ConnectionString="Data Source=.\SQLEXPRESS;Initial Catalog=HistoryLog;Integrated Security=True" Provider="System.Data.SqlClient" />
+  <Table Name="HistoryLog.ItemExtraIp" Member="ItemExtraIps" AccessModifier="Internal">
+    <Type Name="ItemExtraIp" AccessModifier="Internal">
+      <Column Name="ItemId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Ip" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Item_ItemExtraIp" Member="Item" AccessModifier="Internal" ThisKey="ItemId" OtherKey="ItemId" Type="Item" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="HistoryLog.Item" Member="Items" AccessModifier="Internal">
+    <Type Name="Item" AccessModifier="Internal">
+      <Column Name="ItemId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EventId" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="OriginatorId" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Ip" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="RelatedTo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Arguments" Type="System.String" DbType="VarChar(255)" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Item_ItemExtraIp" Member="ItemExtraIps" AccessModifier="Internal" ThisKey="ItemId" OtherKey="ItemId" Type="ItemExtraIp" />
+      <Association Name="Event_Item" Member="Event" AccessModifier="Internal" ThisKey="EventId" OtherKey="EventId" Type="Event" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="HistoryLog.Event" Member="Events" AccessModifier="Internal">
+    <Type Name="Event" AccessModifier="Internal">
+      <Column Name="EventId" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Format" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="Event_Item" Member="Items" AccessModifier="Internal" ThisKey="EventId" OtherKey="EventId" Type="Item" />
+    </Type>
+  </Table>
+</Database>

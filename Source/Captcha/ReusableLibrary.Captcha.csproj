@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E456BAB8-18BC-4667-B7B8-216B2C6CB13C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ReusableLibrary.Captcha</RootNamespace>
+    <AssemblyName>ReusableLibrary.Captcha</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\Key.snk</AssemblyOriginatorKeyFile>
+    <StyleCopTreatErrorsAsWarnings>false</StyleCopTreatErrorsAsWarnings>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\GlobalAssemblyInfo.cs">
+      <Link>Properties\GlobalAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="AbstractCaptchaFactory.cs" />
+    <Compile Include="CaptchaBuilder.cs" />
+    <Compile Include="CaptchaHandler.cs" />
+    <Compile Include="CaptchaHtmlHelper.cs" />
+    <Compile Include="CaptchaHttpHandler.cs" />
+    <Compile Include="CaptchaOptionDefaults.cs" />
+    <Compile Include="CaptchaOptionNames.cs" />
+    <Compile Include="CaptchaOptions.cs" />
+    <Compile Include="Providers\CaptchaInstrumentationProvider.cs" />
+    <Compile Include="Providers\ICaptchaInstrumentationProvider.cs" />
+    <Compile Include="SimpleCaptchaHandler.cs" />
+    <Compile Include="SimpleCaptchaHttpHandler.cs" />
+    <Compile Include="Internals\ResourceHelper.cs" />
+    <Compile Include="Internals\ColorHelper.cs" />
+    <Compile Include="Content\BitmapContent.cs" />
+    <Compile Include="Content\EmptyErrorProvider.cs" />
+    <Compile Include="Content\IContentProvider.cs" />
+    <Compile Include="Content\IErrorProvider.cs" />
+    <Compile Include="Content\IImageCodecInfo.cs" />
+    <Compile Include="Content\JpegImageCodecInfo.cs" />
+    <Compile Include="BitmapCaptchaFactory.cs" />
+    <Compile Include="DefaultCaptchaValidator.cs" />
+    <Compile Include="ITuringNumber.cs" />
+    <Compile Include="Providers\DefaultChallengeCodeProvider.cs" />
+    <Compile Include="Providers\DefaultTuringNumberProvider.cs" />
+    <Compile Include="Providers\DefaultVaryByCustomProvider.cs" />
+    <Compile Include="Drawings\BackgroundDrawing.cs" />
+    <Compile Include="Drawings\CurveDrawing.cs" />
+    <Compile Include="Drawings\EllipseDrawing.cs" />
+    <Compile Include="Drawings\FontWarpFactor.cs" />
+    <Compile Include="Drawings\IGraphicsDrawing.cs" />
+    <Compile Include="Drawings\NoiseLevel.cs" />
+    <Compile Include="Drawings\WarpTextDrawing.cs" />
+    <Compile Include="ICaptchaFactory.cs" />
+    <Compile Include="ICaptchaValidator.cs" />
+    <Compile Include="Providers\IChallengeCodeProvider.cs" />
+    <Compile Include="Providers\ITuringNumberProvider.cs" />
+    <Compile Include="Providers\IVaryByCustomProvider.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Internals\InnerWebCache.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Key.snk">
+      <Link>Properties\Key.snk</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Abstractions\ReusableLibrary.Abstractions.csproj">
+      <Project>{B9BD16F5-7B2C-4B3B-A8C5-7423B6F5DCF3}</Project>
+      <Name>ReusableLibrary.Abstractions</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
+  <Import Project="$(MSBuildProjectDirectory)\..\..\Build\StyleCop\Microsoft.StyleCop.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <Target Name="AfterRebuild">
+    <Message Text="Executing after build ... " />
+    <FxCop ProjectFile="$(MSBuildProjectDirectory)\..\..\Build\FxCop\Settings.FxCop" TargetAssemblies="$(MSBuildProjectDirectory)\$(OutputPath)\$(AssemblyName).dll" DirectOutputToConsole="true" FailOnError="true" />
+  </Target>
+</Project>

@@ -1,0 +1,60 @@
+<Project DefaultTargets="Build" InitialTargets="Init" ToolsVersion="4.0"
+    xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="Master.Targets" />
+
+    <PropertyGroup>
+        <Company></Company>
+        <AppName>ReusableLibrary</AppName>
+        <Copyright>This software is based on the MIT license.</Copyright>
+
+        <StartMemchached>
+            <![CDATA[
+            public static void ScriptMain() {
+                ProcessStartInfo psi = new ProcessStartInfo();
+                psi.FileName = @"..\Tools\memcached-x86\memcached.exe";
+                psi.WindowStyle = ProcessWindowStyle.Hidden;
+                psi.Arguments = "-p 11211";            
+                Process.Start(psi);
+                psi.Arguments = "-p 11311";
+                Process.Start(psi);
+            }]]>
+        </StartMemchached>
+    </PropertyGroup>
+
+    <Target Name="Test">
+        <xunit Assembly="$(SourceRoot)\Tests\Abstractions\bin\$(BuildType)\ReusableLibrary.Abstractions.Tests.dll"
+               Xml="$(Artifacts)\Tests\Abstractions.xml" />
+        <xunit Assembly="$(SourceRoot)\Tests\HistoryLog\bin\$(BuildType)\ReusableLibrary.HistoryLog.Tests.dll"
+               Xml="$(Artifacts)\Tests\HistoryLog.xml" />
+        <xunit Assembly="$(SourceRoot)\Tests\Host\bin\$(BuildType)\ReusableLibrary.Host.Tests.dll"
+               Xml="$(Artifacts)\Tests\Host.xml" />
+        <Script Language="C#" Code="$(StartMemchached)" Imports="System.Diagnostics" />
+        <xunit Assembly="$(SourceRoot)\Tests\Memcached\bin\$(BuildType)\ReusableLibrary.Memcached.Tests.dll"
+               Xml="$(Artifacts)\Tests\Memcached.xml" />
+        <Exec Command="taskkill /F /IM memcached.exe" IgnoreExitCode="true" />
+        <xunit Assembly="$(SourceRoot)\Tests\Web\bin\$(BuildType)\ReusableLibrary.Web.Tests.dll"
+               Xml="$(Artifacts)\Tests\Web.xml" />
+        <xunit Assembly="$(SourceRoot)\Tests\Web.Mvc\bin\$(BuildType)\ReusableLibrary.Web.Mvc.Tests.dll"
+               Xml="$(Artifacts)\Tests\Web.Mvc.xml" />
+    </Target>
+
+    <Target Name="PackageCore">
+        <Copy SourceFiles="$(SourceRoot)\Source\Abstractions\bin\$(BuildType)\ReusableLibrary.Abstractions.dll" DestinationFolder="$(Artifacts)\Bin" />
+        <Copy SourceFiles="$(SourceRoot)\Source\Captcha\bin\$(BuildType)\ReusableLibrary.Captcha.dll" DestinationFolder="$(Artifacts)\Bin" />
+        <Copy SourceFiles="$(SourceRoot)\Source\EntLib\bin\$(BuildType)\ReusableLibrary.EntLib.dll" DestinationFolder="$(Artifacts)\Bin" />
+        <Copy SourceFiles="$(SourceRoot)\Source\Host\bin\$(BuildType)\ReusableLibrary.Host.dll" DestinationFolder="$(Artifacts)\Bin" />
+
+        <Copy SourceFiles="$(SourceRoot)\Source\HistoryLog\bin\$(BuildType)\ReusableLibrary.HistoryLog.dll" DestinationFolder="$(Artifacts)\Bin" />
+        <Copy SourceFiles="$(SourceRoot)\Source\HistoryLog\default-historylog-mapping.config" DestinationFolder="$(Artifacts)\Bin" />
+        <Copy SourceFiles="$(SourceRoot)\Source\HistoryLog\default-historylog-sql.config" DestinationFolder="$(Artifacts)\Bin" />
+        <Copy SourceFiles="$(SourceRoot)\Source\HistoryLog\default-historylog.config" DestinationFolder="$(Artifacts)\Bin" />
+
+        <Copy SourceFiles="$(SourceRoot)\Source\Memcached\bin\$(BuildType)\ReusableLibrary.Memcached.dll" DestinationFolder="$(Artifacts)\Bin" />
+        <Copy SourceFiles="$(SourceRoot)\Source\QualityAssurance\bin\$(BuildType)\ReusableLibrary.QualityAssurance.dll" DestinationFolder="$(Artifacts)\Bin" />
+        <Copy SourceFiles="$(SourceRoot)\Source\Supplemental\bin\$(BuildType)\ReusableLibrary.Supplemental.dll" DestinationFolder="$(Artifacts)\Bin" />
+        <Copy SourceFiles="$(SourceRoot)\Source\Unity\bin\$(BuildType)\ReusableLibrary.Unity.dll" DestinationFolder="$(Artifacts)\Bin" />
+        <Copy SourceFiles="$(SourceRoot)\Source\WatiN\bin\$(BuildType)\ReusableLibrary.WatiN.dll" DestinationFolder="$(Artifacts)\Bin" />
+        <Copy SourceFiles="$(SourceRoot)\Source\Web\bin\$(BuildType)\ReusableLibrary.Web.dll" DestinationFolder="$(Artifacts)\Bin" />
+        <Copy SourceFiles="$(SourceRoot)\Source\Web.Mvc\bin\$(BuildType)\ReusableLibrary.Web.Mvc.dll" DestinationFolder="$(Artifacts)\Bin" />
+    </Target>
+</Project>

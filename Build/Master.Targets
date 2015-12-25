@@ -1,0 +1,156 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+    <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
+    <UsingTask AssemblyFile="xUnit\xunit.runner.msbuild.dll" TaskName="Xunit.Runner.MSBuild.xunit"/>
+
+    <PropertyGroup>
+        <!-- 
+        Configuration Settings 
+        -->
+        <Company Condition=" '$(Company)' == '' ">XYZ</Company>
+        <AppName Condition=" '$(AppName)' == '' ">Unnamed</AppName>
+        <Copyright Condition=" '$(Copyright)' == '' ">All Rights Reserved.</Copyright>
+
+        <SourceRoot Condition=" '$(SourceRoot)' == '' ">$(MSBuildProjectDirectory)\..</SourceRoot>
+
+        <Major Condition=" '$(Major)' == '' ">1</Major>
+        <Minor Condition=" '$(Minor)' == '' ">1</Minor>
+        <Build Condition=" '$(Build)' == '' ">0</Build>
+        <Build Condition=" '$(CCNetNumericLabel)' != '' ">$(CCNetNumericLabel)</Build>
+        <Revision Condition=" '$(Revision)' == '' ">0</Revision>
+
+        <BuildType Condition="'$(BuildType)' == ''">Release</BuildType>
+
+        <Artifacts Condition=" '$(Artifacts)' == '' ">$(MSBuildProjectDirectory)\..\..\artifacts</Artifacts>
+    </PropertyGroup>
+
+    <Target Name="Init">
+        <Message Text="Initializing Folders Structure" />
+        <RemoveDir Directories="$(Artifacts)\bin;$(Artifacts)\tests" />
+        <MakeDir Directories="$(Artifacts);$(Artifacts)\bin;$(Artifacts)\tests;$(Artifacts)\delivery;$(Artifacts)\delivery\archive" />
+        <Time>
+            <Output TaskParameter="Month" PropertyName="Month" />
+            <Output TaskParameter="Day" PropertyName="Day" />
+            <Output TaskParameter="Year" PropertyName="Year" />
+            <Output TaskParameter="Hour" PropertyName="Hour" />
+            <Output TaskParameter="Minute" PropertyName="Minute" />
+            <Output TaskParameter="Second" PropertyName="Second" />
+        </Time>
+
+        <SvnVersion LocalPath="$(SourceRoot)"
+                    Condition="Exists('$(ProgramFiles)\subversion\bin\svn.exe')">
+            <Output TaskParameter="Revision" PropertyName="Revision" />
+        </SvnVersion>
+        <PropertyGroup>
+            <VersionScript>
+                public static string ScriptMain() {
+                int r = $(Revision);
+                return (r > 60000 ? r - 60000 : r).ToString();
+                }
+            </VersionScript>
+        </PropertyGroup>
+        <Script Language="C#" Code="$(VersionScript)">
+            <Output TaskParameter="ReturnValue" PropertyName="Revision" />
+        </Script>
+
+        <Time Format="yyyy-MM-dd">
+            <Output TaskParameter="FormattedTime" PropertyName="BuildDate" />
+        </Time>
+        <PropertyGroup>
+            <Version>$(Major).$(Minor).$(Build).$(Revision)</Version>
+        </PropertyGroup>
+        <Message Text="BuildType: $(BuildType)" />
+        <Message Text="Version: $(Version)" />
+    </Target>
+
+    <Target Name="BeforeBuild">
+        <Copy SourceFiles="$(SourceRoot)\Source\GlobalAssemblyInfo.cs"
+          DestinationFiles="$(SourceRoot)\Source\GlobalAssemblyInfo2.cs" />
+        <CallTarget Targets="AssemblyInfo" />
+        <CallTarget Targets="Configure" />
+    </Target>
+
+    <Target Name="AfterBuild">
+        <Copy SourceFiles="$(SourceRoot)\Source\GlobalAssemblyInfo2.cs"
+          DestinationFiles="$(SourceRoot)\Source\GlobalAssemblyInfo.cs" />
+        <Delete Files="$(SourceRoot)\Source\GlobalAssemblyInfo2.cs" />
+    </Target>
+
+    <Target Name="Clean">
+        <MSBuild Projects="$(SourceRoot)\$(AppName).sln" Targets="Clean"
+                 Properties="Configuration=$(BuildType)" />
+    </Target>
+
+    <Target Name="CoreBuild">
+        <MSBuild Projects="$(SourceRoot)\$(AppName).sln" Targets="Rebuild"
+                 Properties="Configuration=$(BuildType)"/>
+    </Target>
+
+    <Target Name="AssemblyInfo"
+            Condition="$(Build) != '0' and Exists('$(SourceRoot)\Source\GlobalAssemblyInfo.cs')" >
+        <AssemblyInfo CodeLanguage="CS"
+                      OutputFile="$(SourceRoot)\Source\GlobalAssemblyInfo.cs"
+                      AssemblyProduct="$(AppName)"
+                      AssemblyCompany="$(Company)"
+                      AssemblyConfiguration="$(Configuration)"
+                      AssemblyVersion="$(Version)"
+                      AssemblyFileVersion="$(Version)"
+                      AssemblyCopyright="$(Copyright)"
+                  />
+    </Target>
+
+    <Target Name="Configure">
+        <!-- 
+        Placeholder target, to be overriden...
+        -->
+    </Target>
+
+    <Target Name="Package" DependsOnTargets="PackageCore;PackageBin;PackageSource">
+    </Target>
+
+    <Target Name="PackageBin">
+        <ItemGroup>
+            <CleanupBinFiles Include="$(Artifacts)\bin\**\.svn\**" />
+            <CleanupBinFiles Include="$(Artifacts)\bin\**\bin\*.xml" />
+            <CleanupBinFiles Include="$(Artifacts)\bin\**\obj\**" />
+            <CleanupBinFiles Include="$(Artifacts)\bin\**\*.csproj" />
+            <CleanupBinFiles Include="$(Artifacts)\bin\**\*.csproj.user" />
+        </ItemGroup>
+        <Delete Files="@(CleanupBinFiles)" />
+
+        <ItemGroup>
+            <BinZipFiles Include="$(Artifacts)\bin\**\*.*" />
+        </ItemGroup>
+        <Zip Files="@(BinZipFiles)" WorkingDirectory="$(Artifacts)\bin"
+             ZipFileName="$(Artifacts)\delivery\$(AppName) (bin).zip" />
+        <Copy SourceFiles="$(Artifacts)\delivery\$(AppName) (bin).zip"
+              DestinationFiles="$(Artifacts)\delivery\archive\$(AppName) $(BuildDate) v$(Version) (bin).zip" />
+
+        <RemoveDir Directories="$(Artifacts)\bin" />
+    </Target>
+
+    <Target Name="PackageSource">
+        <!--
+        Package source code and archive
+        -->
+        <ItemGroup>
+            <DefaultExclude Include="$(SourceRoot)\**\bin\**" />
+            <DefaultExclude Include="$(SourceRoot)\**\obj\**" />
+            <DefaultExclude Include="$(SourceRoot)\**\Release\**" />
+            <DefaultExclude Include="$(SourceRoot)\**\Debug\**" />
+            <DefaultExclude Include="$(SourceRoot)\**\*.user" />
+            <DefaultExclude Include="$(SourceRoot)\**\*.suo" />
+            <DefaultExclude Include="$(SourceRoot)\**\*.cache" />
+            <DefaultExclude Include="$(SourceRoot)\**\.svn\**" />
+        </ItemGroup>
+        <ItemGroup>
+            <SourceZipFiles Include="$(SourceRoot)\**" Exclude="@(DefaultExclude)" />
+        </ItemGroup>
+
+        <Zip Files="@(SourceZipFiles)" WorkingDirectory="$(SourceRoot)"
+             ZipFileName="$(Artifacts)\delivery\$(AppName) (source).zip" />
+        <Copy SourceFiles="$(Artifacts)\delivery\$(AppName) (source).zip"
+              DestinationFiles="$(Artifacts)\delivery\archive\$(AppName) $(BuildDate) v$(Version) (source).zip" />
+    </Target>
+</Project>
+
