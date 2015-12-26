@@ -1,0 +1,10 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\MSBuild\ToolsVersions\4.0]
+"MSBuildToolsPath"="C:\\WINDOWS\\Microsoft.NET\\Framework\\v4.0.30319\\"
+"MSBuildToolsRoot"="C:\\WINDOWS\\Microsoft.NET\\Framework\\"
+"FrameworkSDKRoot"="$(Registry:HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Microsoft SDKs\\Windows\\v7.1@InstallationFolder)"
+"MSBuildRuntimeVersion"="4.0.30319"
+"SDK40ToolsPath"="$(Registry:HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Microsoft SDKs\\Windows\\v7.1\\WinSDK-NetFx40Tools-x86@InstallationFolder)"
+"SDK35ToolsPath"="$(Registry:HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Microsoft SDKs\\Windows\\v7.1\\WinSDKNetFx35Tools@InstallationFolder)"
+"MSBuildToolsPath32"="$(Registry:HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\MSBuild\\ToolsVersions\\4.0@MSBuildToolsPath)"
