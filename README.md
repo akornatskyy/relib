@@ -15,6 +15,7 @@ Modular design for both .net 2.0 and .net 4.
 * [Microsoft® SQL Server 2008 R2 SP2 - Express Edition](https://www.microsoft.com/en-us/download/details.aspx?id=30438)
 * [Visual Studio .NET 2010 Express - Web Developer](https://go.microsoft.com/?linkid=9709969)
 * [ASP.NET MVC 3 Tools](http://www.microsoft.com/en-us/download/details.aspx?id=1491)
+* [xUnit 1.9.2](https://xunit.codeplex.com/releases/view/110961)
 
 # Tools and Fixes
 
@@ -24,5 +25,6 @@ There are the following tools used (see *Tools\\requirements*):
 * MSBuildSdkToolsPathRegistryFix.reg
 * Microsoft Fxcop 10.0
 * FxCopRegistryFix.reg
-* Find two *NoWarn* tags with text *2008* and comment them out in file *C:\Windows\Microsoft.NET\Framework\v4.0.30319\Microsoft.CSharp.targets*.
+* Find two *NoWarn* tags with text *2008* and comment them out in file *C:\Windows\Microsoft.NET\Framework\v4.0.30319\Microsoft.CSharp.targets*
+* Allow memcached in Windows Firewall
 
