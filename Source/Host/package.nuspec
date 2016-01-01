@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>ReusableLibrary.Host</id>
+        <version>$Version$</version>
+        <authors>Andriy Kornatskyy</authors>
+        <description>Applications: console, singleton, service host, timed. Service host installer.</description>
+        <language>en-US</language>
+        <projectUrl>https://github.com/akornatskyy/relib</projectUrl>
+        <licenseUrl>https://raw.githubusercontent.com/akornatskyy/relib/master/Source/License.txt</licenseUrl>
+        <tags>relib host console singleton service timed installer</tags>
+        <dependencies>
+            <dependency id="ReusableLibrary.Abstractions" version="1.1.5.1" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="bin\$BuildType$\ReusableLibrary.Host.dll" target="lib\net20" />
+        <file src="bin\$BuildType$\ReusableLibrary.Host.pdb" target="lib\net20" />
+    </files>
+</package>

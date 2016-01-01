@@ -102,6 +102,7 @@
     <None Include="default-historylog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="package.nuspec" />
     <None Include="Repository\LinqToSql\HistoryLog.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>HistoryLog.designer.cs</LastGenOutput>

@@ -1,7 +1,8 @@
 <Project DefaultTargets="Build" InitialTargets="Init" ToolsVersion="4.0"
     xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <Import Project="Master.Targets" />
-
+    <UsingTask AssemblyFile="xUnit\xunit.runner.msbuild.dll" TaskName="Xunit.Runner.MSBuild.xunit"/>
+    
     <PropertyGroup>
         <Company></Company>
         <AppName>ReusableLibrary</AppName>
@@ -36,25 +37,5 @@
                Xml="$(Artifacts)\Tests\Web.xml" />
         <xunit Assembly="$(SourceRoot)\Tests\Web.Mvc\bin\$(BuildType)\ReusableLibrary.Web.Mvc.Tests.dll"
                Xml="$(Artifacts)\Tests\Web.Mvc.xml" />
-    </Target>
-
-    <Target Name="PackageCore">
-        <Copy SourceFiles="$(SourceRoot)\Source\Abstractions\bin\$(BuildType)\ReusableLibrary.Abstractions.dll" DestinationFolder="$(Artifacts)\Bin" />
-        <Copy SourceFiles="$(SourceRoot)\Source\Captcha\bin\$(BuildType)\ReusableLibrary.Captcha.dll" DestinationFolder="$(Artifacts)\Bin" />
-        <Copy SourceFiles="$(SourceRoot)\Source\EntLib\bin\$(BuildType)\ReusableLibrary.EntLib.dll" DestinationFolder="$(Artifacts)\Bin" />
-        <Copy SourceFiles="$(SourceRoot)\Source\Host\bin\$(BuildType)\ReusableLibrary.Host.dll" DestinationFolder="$(Artifacts)\Bin" />
-
-        <Copy SourceFiles="$(SourceRoot)\Source\HistoryLog\bin\$(BuildType)\ReusableLibrary.HistoryLog.dll" DestinationFolder="$(Artifacts)\Bin" />
-        <Copy SourceFiles="$(SourceRoot)\Source\HistoryLog\default-historylog-mapping.config" DestinationFolder="$(Artifacts)\Bin" />
-        <Copy SourceFiles="$(SourceRoot)\Source\HistoryLog\default-historylog-sql.config" DestinationFolder="$(Artifacts)\Bin" />
-        <Copy SourceFiles="$(SourceRoot)\Source\HistoryLog\default-historylog.config" DestinationFolder="$(Artifacts)\Bin" />
-
-        <Copy SourceFiles="$(SourceRoot)\Source\Memcached\bin\$(BuildType)\ReusableLibrary.Memcached.dll" DestinationFolder="$(Artifacts)\Bin" />
-        <Copy SourceFiles="$(SourceRoot)\Source\QualityAssurance\bin\$(BuildType)\ReusableLibrary.QualityAssurance.dll" DestinationFolder="$(Artifacts)\Bin" />
-        <Copy SourceFiles="$(SourceRoot)\Source\Supplemental\bin\$(BuildType)\ReusableLibrary.Supplemental.dll" DestinationFolder="$(Artifacts)\Bin" />
-        <Copy SourceFiles="$(SourceRoot)\Source\Unity\bin\$(BuildType)\ReusableLibrary.Unity.dll" DestinationFolder="$(Artifacts)\Bin" />
-        <Copy SourceFiles="$(SourceRoot)\Source\WatiN\bin\$(BuildType)\ReusableLibrary.WatiN.dll" DestinationFolder="$(Artifacts)\Bin" />
-        <Copy SourceFiles="$(SourceRoot)\Source\Web\bin\$(BuildType)\ReusableLibrary.Web.dll" DestinationFolder="$(Artifacts)\Bin" />
-        <Copy SourceFiles="$(SourceRoot)\Source\Web.Mvc\bin\$(BuildType)\ReusableLibrary.Web.Mvc.dll" DestinationFolder="$(Artifacts)\Bin" />
     </Target>
 </Project>

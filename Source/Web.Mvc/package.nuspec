@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>ReusableLibrary.Web.Mvc</id>
+        <version>$Version$</version>
+        <authors>Andriy Kornatskyy</authors>
+        <description>Integration with ASP.NET MVC.</description>
+        <language>en-US</language>
+        <projectUrl>https://github.com/akornatskyy/relib</projectUrl>
+        <licenseUrl>https://raw.githubusercontent.com/akornatskyy/relib/master/Source/License.txt</licenseUrl>
+        <tags>relib asp.net web mvc</tags>
+        <dependencies>
+            <dependency id="ReusableLibrary.Abstractions" version="1.1.5.1" />
+            <dependency id="Microsoft.AspNet.Mvc" version="3.0.20105.1" />
+            <dependency id="Microsoft.AspNet.WebPages" version="1.0.20105.408" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="bin\$BuildType$\ReusableLibrary.Web.Mvc.dll" target="lib\net40" />
+        <file src="bin\$BuildType$\ReusableLibrary.Web.Mvc.pdb" target="lib\net40" />
+    </files>
+</package>

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>ReusableLibrary.HistoryLog</id>
+        <version>$Version$</version>
+        <authors>Andriy Kornatskyy</authors>
+        <description>Easy way to organize a user, service, audit history log.</description>
+        <language>en-US</language>
+        <projectUrl>https://github.com/akornatskyy/relib</projectUrl>
+        <licenseUrl>https://raw.githubusercontent.com/akornatskyy/relib/master/Source/License.txt</licenseUrl>
+        <tags>relib audit history log</tags>
+        <dependencies>
+            <dependency id="ReusableLibrary.Abstractions" version="1.1.5.1" />
+            <dependency id="ReusableLibrary.Supplemental" version="1.1.5.1" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="bin\$BuildType$\ReusableLibrary.HistoryLog.dll" target="lib\net40" />
+        <file src="bin\$BuildType$\ReusableLibrary.HistoryLog.pdb" target="lib\net40" />
+        <file src="default-historylog-mapping.config" target="config" />
+        <file src="default-historylog-sql.config" target="config" />
+        <file src="default-historylog.config" target="config" />
+    </files>
+</package>

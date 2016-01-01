@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>ReusableLibrary.EntLib</id>
+        <version>$Version$</version>
+        <authors>Andriy Kornatskyy</authors>
+        <description>Integration with Enterprise Library Caching and Validation.</description>
+        <language>en-US</language>
+        <projectUrl>https://github.com/akornatskyy/relib</projectUrl>
+        <licenseUrl>https://raw.githubusercontent.com/akornatskyy/relib/master/Source/License.txt</licenseUrl>
+        <tags>relib entlib enterprise library validation caching</tags>
+        <dependencies>
+            <dependency id="ReusableLibrary.Abstractions" version="1.1.5.1" />
+            <dependency id="EnterpriseLibrary.Caching" version="5.0.505.0" />
+            <dependency id="EnterpriseLibrary.Validation" version="5.0.505.0" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="bin\$BuildType$\ReusableLibrary.EntLib.dll" target="lib\net40" />
+        <file src="bin\$BuildType$\ReusableLibrary.EntLib.pdb" target="lib\net40" />
+    </files>
+</package>

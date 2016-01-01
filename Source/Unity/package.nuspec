@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>ReusableLibrary.Unity</id>
+        <version>$Version$</version>
+        <authors>Andriy Kornatskyy</authors>
+        <description>Implementation of Reusable Library Abstractions Dependency Resolver (IoC) for Unity. LifetimeManagers: WorkItem, WebRequest.</description>
+        <language>en-US</language>
+        <projectUrl>https://github.com/akornatskyy/relib</projectUrl>
+        <licenseUrl>https://raw.githubusercontent.com/akornatskyy/relib/master/Source/License.txt</licenseUrl>
+        <tags>relib dependency resolver IoC unity</tags>
+        <dependencies>
+            <dependency id="ReusableLibrary.Abstractions" version="1.1.5.1" />
+            <dependency id="Unity" version="2.1.505.0" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="bin\$BuildType$\ReusableLibrary.Unity.dll" target="lib\net40" />
+        <file src="bin\$BuildType$\ReusableLibrary.Unity.pdb" target="lib\net40" />
+    </files>
+</package>

@@ -98,6 +98,7 @@
     <None Include="..\Key.snk">
       <Link>Properties\Key.snk</Link>
     </None>
+    <None Include="package.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Abstractions\ReusableLibrary.Abstractions.csproj">

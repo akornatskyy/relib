@@ -1,7 +1,6 @@
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
-    <UsingTask AssemblyFile="xUnit\xunit.runner.msbuild.dll" TaskName="Xunit.Runner.MSBuild.xunit"/>
 
     <PropertyGroup>
         <!-- 
@@ -23,38 +22,11 @@
 
         <Artifacts Condition=" '$(Artifacts)' == '' ">$(MSBuildProjectDirectory)\..\..\artifacts</Artifacts>
     </PropertyGroup>
-
+  
     <Target Name="Init">
-        <Message Text="Initializing Folders Structure" />
-        <RemoveDir Directories="$(Artifacts)\bin;$(Artifacts)\tests" />
-        <MakeDir Directories="$(Artifacts);$(Artifacts)\bin;$(Artifacts)\tests;$(Artifacts)\delivery;$(Artifacts)\delivery\archive" />
+        <MakeDir Directories="$(Artifacts)\Tests" />
         <Time>
-            <Output TaskParameter="Month" PropertyName="Month" />
-            <Output TaskParameter="Day" PropertyName="Day" />
             <Output TaskParameter="Year" PropertyName="Year" />
-            <Output TaskParameter="Hour" PropertyName="Hour" />
-            <Output TaskParameter="Minute" PropertyName="Minute" />
-            <Output TaskParameter="Second" PropertyName="Second" />
-        </Time>
-
-        <SvnVersion LocalPath="$(SourceRoot)"
-                    Condition="Exists('$(ProgramFiles)\subversion\bin\svn.exe')">
-            <Output TaskParameter="Revision" PropertyName="Revision" />
-        </SvnVersion>
-        <PropertyGroup>
-            <VersionScript>
-                public static string ScriptMain() {
-                int r = $(Revision);
-                return (r > 60000 ? r - 60000 : r).ToString();
-                }
-            </VersionScript>
-        </PropertyGroup>
-        <Script Language="C#" Code="$(VersionScript)">
-            <Output TaskParameter="ReturnValue" PropertyName="Revision" />
-        </Script>
-
-        <Time Format="yyyy-MM-dd">
-            <Output TaskParameter="FormattedTime" PropertyName="BuildDate" />
         </Time>
         <PropertyGroup>
             <Version>$(Major).$(Minor).$(Build).$(Revision)</Version>
@@ -67,7 +39,6 @@
         <Copy SourceFiles="$(SourceRoot)\Source\GlobalAssemblyInfo.cs"
           DestinationFiles="$(SourceRoot)\Source\GlobalAssemblyInfo2.cs" />
         <CallTarget Targets="AssemblyInfo" />
-        <CallTarget Targets="Configure" />
     </Target>
 
     <Target Name="AfterBuild">
@@ -95,62 +66,25 @@
                       AssemblyConfiguration="$(Configuration)"
                       AssemblyVersion="$(Version)"
                       AssemblyFileVersion="$(Version)"
-                      AssemblyCopyright="$(Copyright)"
+                      AssemblyCopyright="Copyright © 2010 - $(Year). $(Copyright)"
                   />
     </Target>
 
-    <Target Name="Configure">
-        <!-- 
-        Placeholder target, to be overriden...
-        -->
+    <Target Name="Prepare">
+        <Exec Command="nuget.exe restore &quot;$(SourceRoot)&quot; -ConfigFile ..\nuget.config -NonInteractive"
+              IgnoreStandardErrorWarningFormat="true"/>
     </Target>
 
-    <Target Name="Package" DependsOnTargets="PackageCore;PackageBin;PackageSource">
+    <Target Name="Package">
+        <ItemGroup>
+            <NuspecFiles Include="$(SourceRoot)\**\package.nuspec" />
+        </ItemGroup>
+        <Exec Command="nuget.exe pack &quot;%(NuspecFiles.Identity)&quot; -Properties BuildType=$(BuildType);Version=$(Version) -NonInteractive -OutputDirectory $(Artifacts)"
+              IgnoreStandardErrorWarningFormat="true"/>
     </Target>
 
-    <Target Name="PackageBin">
-        <ItemGroup>
-            <CleanupBinFiles Include="$(Artifacts)\bin\**\.svn\**" />
-            <CleanupBinFiles Include="$(Artifacts)\bin\**\bin\*.xml" />
-            <CleanupBinFiles Include="$(Artifacts)\bin\**\obj\**" />
-            <CleanupBinFiles Include="$(Artifacts)\bin\**\*.csproj" />
-            <CleanupBinFiles Include="$(Artifacts)\bin\**\*.csproj.user" />
-        </ItemGroup>
-        <Delete Files="@(CleanupBinFiles)" />
-
-        <ItemGroup>
-            <BinZipFiles Include="$(Artifacts)\bin\**\*.*" />
-        </ItemGroup>
-        <Zip Files="@(BinZipFiles)" WorkingDirectory="$(Artifacts)\bin"
-             ZipFileName="$(Artifacts)\delivery\$(AppName) (bin).zip" />
-        <Copy SourceFiles="$(Artifacts)\delivery\$(AppName) (bin).zip"
-              DestinationFiles="$(Artifacts)\delivery\archive\$(AppName) $(BuildDate) v$(Version) (bin).zip" />
-
-        <RemoveDir Directories="$(Artifacts)\bin" />
-    </Target>
-
-    <Target Name="PackageSource">
-        <!--
-        Package source code and archive
-        -->
-        <ItemGroup>
-            <DefaultExclude Include="$(SourceRoot)\**\bin\**" />
-            <DefaultExclude Include="$(SourceRoot)\**\obj\**" />
-            <DefaultExclude Include="$(SourceRoot)\**\Release\**" />
-            <DefaultExclude Include="$(SourceRoot)\**\Debug\**" />
-            <DefaultExclude Include="$(SourceRoot)\**\*.user" />
-            <DefaultExclude Include="$(SourceRoot)\**\*.suo" />
-            <DefaultExclude Include="$(SourceRoot)\**\*.cache" />
-            <DefaultExclude Include="$(SourceRoot)\**\.svn\**" />
-        </ItemGroup>
-        <ItemGroup>
-            <SourceZipFiles Include="$(SourceRoot)\**" Exclude="@(DefaultExclude)" />
-        </ItemGroup>
-
-        <Zip Files="@(SourceZipFiles)" WorkingDirectory="$(SourceRoot)"
-             ZipFileName="$(Artifacts)\delivery\$(AppName) (source).zip" />
-        <Copy SourceFiles="$(Artifacts)\delivery\$(AppName) (source).zip"
-              DestinationFiles="$(Artifacts)\delivery\archive\$(AppName) $(BuildDate) v$(Version) (source).zip" />
+    <Target Name="Publish">
+        <Exec Command="nuget.exe push &quot;$(Artifacts)\*.nupkg&quot; -NonInteractive"
+              IgnoreStandardErrorWarningFormat="true"/>
     </Target>
 </Project>
-

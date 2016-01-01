@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>ReusableLibrary.QualityAssurance</id>
+        <version>$Version$</version>
+        <authors>Andriy Kornatskyy</authors>
+        <description>Profiling: a single test, stress test profiling in a number of threads using a random sequence. Repository test.</description>
+        <language>en-US</language>
+        <projectUrl>https://github.com/akornatskyy/relib</projectUrl>
+        <licenseUrl>https://raw.githubusercontent.com/akornatskyy/relib/master/Source/License.txt</licenseUrl>
+        <tags>relib qa quality assurance profiling test repository</tags>
+        <dependencies>
+            <dependency id="ReusableLibrary.Abstractions" version="1.1.5.1" />
+            <dependency id="ReusableLibrary.Supplemental" version="1.1.5.1" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="bin\$BuildType$\ReusableLibrary.QualityAssurance.dll" target="lib\net40" />
+        <file src="bin\$BuildType$\ReusableLibrary.QualityAssurance.pdb" target="lib\net40" />
+    </files>
+</package>

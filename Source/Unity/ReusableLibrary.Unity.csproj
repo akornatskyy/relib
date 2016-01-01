@@ -86,6 +86,7 @@
     <None Include="..\Key.snk">
       <Link>Properties\Key.snk</Link>
     </None>
+    <None Include="package.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

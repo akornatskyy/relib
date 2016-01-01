@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>ReusableLibrary.Abstractions</id>
+        <version>$Version$</version>
+        <authors>Andriy Kornatskyy</authors>
+        <description>A collection of reusable abstractions for .NET application developer: caching, IoC, pagination, repository, application services, unit of work, background processing, exception trace policy, work item, etc. </description>
+        <language>en-US</language>
+        <projectUrl>https://github.com/akornatskyy/relib</projectUrl>
+        <licenseUrl>https://raw.githubusercontent.com/akornatskyy/relib/master/Source/License.txt</licenseUrl>
+        <tags>relib reusable abstractions caching IoC pagination repository application services unit of work background processing exception trace policy work item</tags>
+        <dependencies>
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="bin\$BuildType$\ReusableLibrary.Abstractions.dll" target="lib\net20" />
+        <file src="bin\$BuildType$\ReusableLibrary.Abstractions.pdb" target="lib\net20" />
+    </files>
+</package>

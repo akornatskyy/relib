@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>ReusableLibrary.Web</id>
+        <version>$Version$</version>
+        <authors>Andriy Kornatskyy</authors>
+        <description>A collection of HTTP modules and handlers.</description>
+        <language>en-US</language>
+        <projectUrl>https://github.com/akornatskyy/relib</projectUrl>
+        <licenseUrl>https://raw.githubusercontent.com/akornatskyy/relib/master/Source/License.txt</licenseUrl>
+        <tags>relib asp.net web</tags>
+        <dependencies>
+            <dependency id="ReusableLibrary.Abstractions" version="1.1.5.1" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="bin\$BuildType$\ReusableLibrary.Web.dll" target="lib\net40" />
+        <file src="bin\$BuildType$\ReusableLibrary.Web.pdb" target="lib\net40" />
+    </files>
+</package>
