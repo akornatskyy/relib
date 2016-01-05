@@ -1,9 +1,7 @@
-﻿using System.Collections.Specialized;
+﻿using System;
+using System.Web;
 using ReusableLibrary.Web.Helpers;
 using Xunit;
-using Xunit.Extensions;
-using System.Web;
-using System;
 
 namespace ReusableLibrary.Web.Tests.Helpers
 {

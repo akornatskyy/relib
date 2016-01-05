@@ -12,7 +12,7 @@ namespace ReusableLibrary.Web.Routing
         public ChoiceRouteConstraint(string[] choices)
         {
             m_choices = choices;
-            Array.Sort(m_choices, StringComparer.InvariantCultureIgnoreCase);
+            Array.Sort(m_choices, StringComparer.OrdinalIgnoreCase);
         }
 
         #region IRouteConstraint Members
@@ -21,7 +21,7 @@ namespace ReusableLibrary.Web.Routing
             RouteValueDictionary values, RouteDirection routeDirection)
         {
             string input = Convert.ToString(values[parameterName], CultureInfo.InvariantCulture);
-            return Array.BinarySearch(m_choices, input, StringComparer.InvariantCultureIgnoreCase) >= 0;
+            return Array.BinarySearch(m_choices, input, StringComparer.OrdinalIgnoreCase) >= 0;
         }
 
         #endregion

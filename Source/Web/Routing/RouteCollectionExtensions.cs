@@ -42,6 +42,7 @@ namespace ReusableLibrary.Web.Routing
             {
                 route.DataTokens["Namespaces"] = namespaces;
             }
+
             routes.Add(name, route);
             return route;
         }

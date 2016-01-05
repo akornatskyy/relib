@@ -29,7 +29,7 @@ namespace ReusableLibrary.Web.Tests.Integration
             var handler = new RedirectExceptionHandler<InvalidOperationException>();
 
             // Act
-            var result = handler.HandleException(new ArgumentException());
+            var result = handler.HandleException(new ArgumentException("arg"));
 
             // Assert
             Assert.False(result);

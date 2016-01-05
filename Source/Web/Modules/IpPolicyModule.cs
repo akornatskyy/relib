@@ -13,19 +13,6 @@ namespace ReusableLibrary.Web
         private static IpNetwork[] g_allowedNetworks = null;
         private static IpNetwork[] g_deniedNetworks = null;
 
-        #region IHttpModule Members
-
-        public void Dispose()
-        {
-        }
-
-        public void Init(HttpApplication app)
-        {
-            app.PostMapRequestHandler += new EventHandler(OnEnter);
-        }
-
-        #endregion
-
         public static bool SecureOnly { get; set; }
 
         public static Regex NoExceptionPathRegex { get; set; }
@@ -39,6 +26,19 @@ namespace ReusableLibrary.Web
         {
             g_deniedNetworks = Parse(networks);
         }
+
+        #region IHttpModule Members
+
+        public void Dispose()
+        {
+        }
+
+        public void Init(HttpApplication app)
+        {
+            app.PostMapRequestHandler += new EventHandler(OnEnter);
+        }
+
+        #endregion
 
         private static IpNetwork[] Parse(string[] networks)
         {
@@ -54,7 +54,7 @@ namespace ReusableLibrary.Web
                 result.Add(new IpNetwork()
                 {
                     Network = IpNumberHelper.ToIpNumber(parts[0]),
-                    Mask = IpNumberHelper.Netmask(Int32.Parse(parts[1]))
+                    Mask = IpNumberHelper.Netmask(Int32.Parse(parts[1], NumberStyles.Integer, CultureInfo.InvariantCulture))
                 });
             }
 

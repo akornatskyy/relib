@@ -35,8 +35,8 @@ namespace ReusableLibrary.Web
         public static bool IsHttpVerbGetOrHead(this HttpRequestBase request)
         {
             var method = request.HttpMethod;
-            return ((method.Length == 3 && method == "GET")
-                || (method.Length == 4 && method == "HEAD"));
+            return (method.Length == 3 && method == "GET") ||
+                (method.Length == 4 && method == "HEAD");
         }
 
         public static bool TryUniqueToken(this HttpRequestBase request, out string uniqueToken)

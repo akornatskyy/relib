@@ -40,8 +40,8 @@ namespace ReusableLibrary.Web
         public static bool IsHttpVerbGetOrHead(this HttpContext context)
         {
             var method = context.Request.HttpMethod;
-            return ((method.Length == 3 && method == "GET")
-                || (method.Length == 4 && method == "HEAD"));
+            return (method.Length == 3 && method == "GET") ||
+                (method.Length == 4 && method == "HEAD");
         }
 
         public static bool TryUniqueToken(this HttpRequest request, out string uniqueToken)
