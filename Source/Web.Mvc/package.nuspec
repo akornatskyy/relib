@@ -11,6 +11,8 @@
         <tags>relib asp.net web mvc</tags>
         <dependencies>
             <dependency id="ReusableLibrary.Abstractions" version="1.1.5.1" />
+            <dependency id="ReusableLibrary.Supplemental" version="1.1.5.1" />
+            <dependency id="ReusableLibrary.Web" version="1.1.5.1" />
             <dependency id="Microsoft.AspNet.Mvc" version="3.0.20105.1" />
             <dependency id="Microsoft.AspNet.WebPages" version="1.0.20105.408" />
         </dependencies>
