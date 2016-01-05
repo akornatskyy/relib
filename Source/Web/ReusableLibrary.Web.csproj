@@ -28,6 +28,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -128,6 +129,8 @@
     <Content Include="Properties\DeniedMailBody.htm" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
+  <Import Project="$(MSBuildProjectDirectory)\..\..\Build\StyleCop\Microsoft.StyleCop.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
@@ -135,4 +138,8 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Target Name="AfterRebuild">
+    <Message Text="Executing after build ... " />
+    <FxCop ProjectFile="$(MSBuildProjectDirectory)\..\..\Build\FxCop\Settings.FxCop" TargetAssemblies="$(MSBuildProjectDirectory)\$(OutputPath)\$(AssemblyName).dll" DirectOutputToConsole="true" FailOnError="true" />
+  </Target>
 </Project>
