@@ -316,7 +316,7 @@
     <Content Include="Properties\ErrorReportMailBody.htm" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
+  <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" Condition="Exists('$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets')" />
   <Import Project="$(MSBuildProjectDirectory)\..\..\Build\StyleCop\Microsoft.StyleCop.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -326,7 +326,6 @@
   </Target>
   -->
   <Target Name="AfterRebuild">
-    <Message Text="Executing after build ... " />
-    <FxCop ProjectFile="$(MSBuildProjectDirectory)\..\..\Build\FxCop\Settings.FxCop" TargetAssemblies="$(MSBuildProjectDirectory)\$(OutputPath)\$(AssemblyName).dll" DirectOutputToConsole="true" FailOnError="true" />
+    <FxCop Condition="Exists('$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets') And $(registry:HKEY_CLASSES_ROOT\FxCopProject\shell\open\command)!=''" ProjectFile="$(MSBuildProjectDirectory)\..\..\Build\FxCop\Settings.FxCop" TargetAssemblies="$(MSBuildProjectDirectory)\$(OutputPath)\$(AssemblyName).dll" DirectOutputToConsole="true" FailOnError="true" />
   </Target>
 </Project>
