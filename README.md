@@ -9,8 +9,6 @@ Integration with Unity 2.1.505.0, EntLib 5.0.505.0, ASP.NET MVC 3.0.20105.1, Wat
 * [IE11 on Windows 7](https://dev.windows.com/en-us/microsoft-edge/tools/vms/mac/)
 * [Microsoft Visual Studio Express 2013 for Web with Update 5](https://www.microsoft.com/en-us/download/details.aspx?id=48133)
 	* Launch Visual Studio, navigate to *Tools > Extensions and Updates* and install available updates
-* [ASP.NET MVC 3 Tools Update
-](http://www.microsoft.com/en-us/download/details.aspx?id=1491)
 * [Microsoft SQL Server 2012 SP3 - Express Edition](https://www.microsoft.com/en-us/download/details.aspx?id=50003)
 * [xUnit 1.9.2](https://xunit.codeplex.com/releases/view/110961)
 
