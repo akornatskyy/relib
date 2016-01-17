@@ -1,7 +1,7 @@
 <Project DefaultTargets="Build" InitialTargets="Init" ToolsVersion="4.0"
     xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <Import Project="Master.Targets" />
-    <UsingTask AssemblyFile="xUnit\xunit.runner.msbuild.dll" TaskName="Xunit.Runner.MSBuild.xunit"/>
+    <UsingTask AssemblyFile="$(SourceRoot)\Lib\xunit.1.9.2\lib\net20\xunit.runner.msbuild.dll" TaskName="Xunit.Runner.MSBuild.xunit"/>
     
     <PropertyGroup>
         <Company></Company>
@@ -29,13 +29,13 @@
                Xml="$(Artifacts)\Tests\HistoryLog.xml" />
         <xunit Assembly="$(SourceRoot)\Tests\Host\bin\$(BuildType)\ReusableLibrary.Host.Tests.dll"
                Xml="$(Artifacts)\Tests\Host.xml" />
-        <Script Language="C#" Code="$(StartMemchached)" Imports="System.Diagnostics" />
-        <xunit Assembly="$(SourceRoot)\Tests\Memcached\bin\$(BuildType)\ReusableLibrary.Memcached.Tests.dll"
-               Xml="$(Artifacts)\Tests\Memcached.xml" />
-        <Exec Command="taskkill /F /IM memcached.exe" IgnoreExitCode="true" />
         <xunit Assembly="$(SourceRoot)\Tests\Web\bin\$(BuildType)\ReusableLibrary.Web.Tests.dll"
                Xml="$(Artifacts)\Tests\Web.xml" />
         <xunit Assembly="$(SourceRoot)\Tests\Web.Mvc\bin\$(BuildType)\ReusableLibrary.Web.Mvc.Tests.dll"
                Xml="$(Artifacts)\Tests\Web.Mvc.xml" />
+        <Script Language="C#" Code="$(StartMemchached)" Imports="System.Diagnostics" />
+        <xunit Assembly="$(SourceRoot)\Tests\Memcached\bin\$(BuildType)\ReusableLibrary.Memcached.Tests.dll"
+               Xml="$(Artifacts)\Tests\Memcached.xml" />
+        <Exec Command="taskkill /F /IM memcached.exe" IgnoreExitCode="true" />
     </Target>
 </Project>
