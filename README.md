@@ -1,5 +1,8 @@
 # Reusable Library
 
+[![Build Status](https://ci.appveyor.com/api/projects/status/c842c7xmiyec9v0o?svg=true)](https://ci.appveyor.com/project/akornatskyy/relib)
+![NuGet Version](https://img.shields.io/nuget/v/ReusableLibrary.Abstractions.svg)
+
 A collection of reusable abstractions for .NET application developer: caching, IoC, pagination, repository, application services, unit of work, background processing, exception trace policy, work item, etc.
 
 Integration with Unity 2.1.505.0, EntLib 5.0.505.0, ASP.NET MVC 3.0.20105.1, WatiN 2.0.50, Memcached 1.4.5.
