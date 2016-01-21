@@ -9,10 +9,10 @@ namespace ReusableLibrary.Web.Mvc.Tests.Helpers
 {
     public sealed class SubstitutionHelperTest
     {
+        private static bool g_substitutionAdded;
+
         private readonly Mock<HttpContextBase> m_mockContext;
         private readonly HtmlHelper m_htmlHelper;
-
-        private static bool g_substitutionAdded;
 
         public SubstitutionHelperTest()
         {

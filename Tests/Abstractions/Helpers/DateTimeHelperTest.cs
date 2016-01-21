@@ -351,12 +351,13 @@ namespace ReusableLibrary.Abstractions.Tests.Helpers
         }
 
         [Theory]
-        [InlineData(1288879440, "2010/11/4 16:04")]
+        [InlineData(1288886640, "2010/11/4 16:04")]
+        [InlineData(1453050242, "2016/01/17 17:04:02")]
         [Trait(Constants.TraitNames.Helpers, "DateTimeHelper")]
         public static void ToUnix(int expected, string s)
         {
             // Arrange
-            var current = DateTime.Parse(s, CultureInfo.InvariantCulture);
+            var current = DateTime.Parse(s, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal).ToUniversalTime();
 
             // Act
             var result = DateTimeHelper.ToUnix(current);
@@ -366,12 +367,13 @@ namespace ReusableLibrary.Abstractions.Tests.Helpers
         }
 
         [Theory]
-        [InlineData("2010/11/4 16:04", 1288879440)]
+        [InlineData("2010/11/4 16:04", 1288886640)]
+        [InlineData("2016/01/17 17:04:02", 1453050242)]
         [Trait(Constants.TraitNames.Helpers, "DateTimeHelper")]
         public static void FromUnix(string s, int current)
         {
             // Arrange
-            var expected = DateTime.Parse(s, CultureInfo.InvariantCulture).ToUniversalTime();
+            var expected = DateTime.Parse(s, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal).ToUniversalTime();
 
             // Act
             var result = DateTimeHelper.FromUnix(current);
