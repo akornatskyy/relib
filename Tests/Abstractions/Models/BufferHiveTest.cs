@@ -35,7 +35,7 @@ namespace ReusableLibrary.Abstractions.Tests.Models
                 Assert.NotNull(result);
                 var buffer = result.Item;
                 Assert.NotNull(buffer);
-                Assert.True(10 <= buffer.Capacity);
+                Assert.True(buffer.Capacity >= 10);
             }
         }
 

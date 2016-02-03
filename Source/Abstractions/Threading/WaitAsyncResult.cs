@@ -27,7 +27,7 @@ namespace ReusableLibrary.Abstractions.Threading
         {
             get
             {
-                return 1 == Interlocked.CompareExchange(ref m_status, 1, 1);
+                return Interlocked.CompareExchange(ref m_status, 1, 1) == 1;
             }
         }
 
@@ -41,7 +41,7 @@ namespace ReusableLibrary.Abstractions.Threading
             {
                 try
                 {
-                    if (0 == Interlocked.CompareExchange(ref m_status, 2, 0))
+                    if (Interlocked.CompareExchange(ref m_status, 2, 0) == 0)
                     {
                         m_waitHandle.Set();
                         Interlocked.Exchange(ref m_status, 3);
@@ -56,7 +56,7 @@ namespace ReusableLibrary.Abstractions.Threading
         public bool Wait(int timeout)
         {
             if (!m_waitHandle.WaitOne(timeout)
-                && 0 == Interlocked.CompareExchange(ref m_status, 1, 0))
+                && Interlocked.CompareExchange(ref m_status, 1, 0) == 0)
             {
                 return false;
             }
@@ -64,7 +64,7 @@ namespace ReusableLibrary.Abstractions.Threading
             // m_waitHandle.Close() must not happen before 
             // m_waitHandle.Set() above completes (else m_waitHandle.Set()
             // might fail)
-            while (3 != Interlocked.CompareExchange(ref m_status, 3, 3))
+            while (Interlocked.CompareExchange(ref m_status, 3, 3) != 3)
             {
                 Thread.SpinWait(1);
             }
