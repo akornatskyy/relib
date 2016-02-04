@@ -65,14 +65,14 @@ namespace ReusableLibrary.Memcached.Tests
         [InlineData(1286399400, "00:10:00")]
         [InlineData(1286398855, "00:00:55")]
         [InlineData(1286402865, "01:07:45")]
-        [InlineData(1288994400, "30.00:00:00")]
-        [InlineData(1288994401, "30.00:00:01")]
+        [InlineData(1288990800, "30.00:00:00")]
+        [InlineData(1288990801, "30.00:00:01")]
         [InlineData(1286398800, "00:00:00.9")]
         [Trait(Constants.TraitNames.Protocol, "CacheClient")]
         public static void GetExpires_ExpiresAt(int expected, string expires)
         {
             // Arrange
-            var expiresAt = new DateTime(2010, 10, 7).Add(TimeSpan.Parse(expires));
+            var expiresAt = new DateTime(2010, 10, 6, 21, 0, 0, DateTimeKind.Utc).ToUniversalTime().Add(TimeSpan.Parse(expires));
 
             // Act
             var result = CacheClient.GetExpires(expiresAt);
