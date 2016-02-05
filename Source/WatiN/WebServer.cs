@@ -71,7 +71,7 @@ namespace ReusableLibrary.WatiN
 
         private static string ProgramFilesX86()
         {
-            if (8 == IntPtr.Size
+            if (IntPtr.Size == 8
                 || (!String.IsNullOrEmpty(Environment.GetEnvironmentVariable("PROCESSOR_ARCHITEW6432"))))
             {
                 return Environment.GetEnvironmentVariable("ProgramFiles(x86)");
