@@ -233,7 +233,7 @@ namespace ReusableLibrary.Memcached.Tests.Protocol
             var result = m_parser.ReadFlags();
 
             // Assert
-            Assert.Equal(Int32.Parse("deadbeef", NumberStyles.HexNumber), result);
+            Assert.Equal(Int32.Parse("deadbeef", NumberStyles.HexNumber, CultureInfo.InvariantCulture), result);
             Assert.Equal(length, m_stream.Position);
         }
 
@@ -304,7 +304,7 @@ namespace ReusableLibrary.Memcached.Tests.Protocol
         private int SetupStream(string input)
         {
             var codes = input.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            var bytes = codes.Translate(c => byte.Parse(c, NumberStyles.HexNumber)).ToArray();
+            var bytes = codes.Translate(c => byte.Parse(c, NumberStyles.HexNumber, CultureInfo.InvariantCulture)).ToArray();
 
             m_stream.Write(bytes, 0, bytes.Length);
             m_stream.Position = 0;

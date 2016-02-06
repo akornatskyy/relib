@@ -68,9 +68,11 @@
     <Compile Include="..\..\Source\GlobalAssemblyInfo.cs">
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="BinaryCacheClientProfilingTest.cs" />
+    <Compile Include="BinaryCacheClientTest.cs" />
     <Compile Include="CacheClientMockTest.cs" />
-    <Compile Include="CacheClientProfilingTest.cs" />
-    <Compile Include="CacheClientTest.cs" />
+    <Compile Include="AbstractCacheClientProfilingTest.cs" />
+    <Compile Include="AbstractCacheClientTest.cs" />
     <Compile Include="Infrastructure\CacheClientContext.cs" />
     <Compile Include="Infrastructure\DomainModelFactory.cs" />
     <Compile Include="Infrastructure\Person.cs" />
@@ -87,6 +89,8 @@
     <Compile Include="Protocol\Text\TextPacketBuilderTest.cs" />
     <Compile Include="Protocol\Text\TextPacketParserTest.cs" />
     <Compile Include="Protocol\Text\ValidKeyEncoderTest.cs" />
+    <Compile Include="TextCacheClientProfilingTest.cs" />
+    <Compile Include="TextCacheClientTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Source\Abstractions\ReusableLibrary.Abstractions.csproj">

@@ -71,7 +71,7 @@ namespace ReusableLibrary.Memcached.Tests.Protocol
             SetupStream("ERROR\r\n");
 
             // Act
-            var result = Assert.Throws<InvalidOperationException>(() => m_parser.ReadStatus());
+            Assert.Throws<InvalidOperationException>(() => m_parser.ReadStatus());
 
             // Assert
             Assert.Equal(7, m_stream.Position);

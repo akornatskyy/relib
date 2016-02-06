@@ -18,7 +18,7 @@ namespace ReusableLibrary.Memcached.Tests
         {
             using (var context = new CacheClientContext())
             {
-                var test = new CacheClientTest.Text();
+                var test = new TextCacheClientTest();
                 test.SetFixture(context);
                 var key = DomainModelFactory.RandomKey();
                 for (int i = 0; i < 100; i++)
@@ -34,7 +34,7 @@ namespace ReusableLibrary.Memcached.Tests
         {
             using (var context = new CacheClientContext())
             {
-                var test = new CacheClientTest.Binary();
+                var test = new BinaryCacheClientTest();
                 test.SetFixture(context);
                 test.Increment(DomainModelFactory.IncrementKeys[0]);
                 test.Increment_NoInitial();
@@ -45,7 +45,7 @@ namespace ReusableLibrary.Memcached.Tests
         {
             for (int i = 0; i < 100; i++)
             {
-                var test = new CacheClientProfilingTest.Text();
+                var test = new TextCacheClientProfilingTest();
                 test.GetString(8);
             }
         }

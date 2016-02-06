@@ -7,7 +7,7 @@ using ReusableLibrary.Memcached.Protocol;
 
 namespace ReusableLibrary.Memcached.Tests.Infrastructure
 {
-    public class CacheClientContext : IDisposable
+    public class CacheClientContext : Disposable
     {
         private readonly IClientFactory m_clientFactory;
         private IProtocolFactory m_protocolFactory;
@@ -60,19 +60,20 @@ namespace ReusableLibrary.Memcached.Tests.Infrastructure
             return m_client;
         }
 
-        #region IDisposable Members
-
-        public void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            Disposable.ReleaseFactory(m_client);            
+            if (!disposing)
+            {
+                return;
+            }
+
+            Disposable.ReleaseFactory(m_client);
             if (m_protocolFactory != null)
             {
-                m_protocolFactory.Dispose();                
+                m_protocolFactory.Dispose();
             }
 
             m_clientFactory.Dispose();
         }
-
-        #endregion
     }
 }

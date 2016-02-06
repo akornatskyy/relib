@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using Moq;
 using ReusableLibrary.Abstractions.Caching;
 using ReusableLibrary.Abstractions.Models;
@@ -37,7 +38,7 @@ namespace ReusableLibrary.Memcached.Tests
         public static void GetExpires_ValidFor(int expected, string expires)
         {
             // Arrange
-            var validFor = TimeSpan.Parse(expires);
+            var validFor = TimeSpan.Parse(expires, CultureInfo.InvariantCulture);
 
             // Act
             var result = CacheClient.GetExpires(validFor);
@@ -53,7 +54,7 @@ namespace ReusableLibrary.Memcached.Tests
         public static void GetExpires_ValidFor_OutOfRange(string expires)
         {
             // Arrange
-            var validFor = TimeSpan.Parse(expires);
+            var validFor = TimeSpan.Parse(expires, CultureInfo.InvariantCulture);
 
             // Act
             Assert.Throws<ArgumentOutOfRangeException>(() => CacheClient.GetExpires(validFor));
@@ -72,7 +73,8 @@ namespace ReusableLibrary.Memcached.Tests
         public static void GetExpires_ExpiresAt(int expected, string expires)
         {
             // Arrange
-            var expiresAt = new DateTime(2010, 10, 6, 21, 0, 0, DateTimeKind.Utc).ToUniversalTime().Add(TimeSpan.Parse(expires));
+            var expiresAt = new DateTime(2010, 10, 6, 21, 0, 0, DateTimeKind.Utc).ToUniversalTime().Add(
+                TimeSpan.Parse(expires, CultureInfo.InvariantCulture));
 
             // Act
             var result = CacheClient.GetExpires(expiresAt);

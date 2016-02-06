@@ -4,6 +4,8 @@ namespace ReusableLibrary.Memcached.Protocol
 {
     public enum RequestOperation
     {
+        None = 0,
+
         Get = 10,
 
         Gets,

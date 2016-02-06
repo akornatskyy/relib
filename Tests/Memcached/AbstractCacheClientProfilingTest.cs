@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+
 using ReusableLibrary.Memcached.Tests.Infrastructure;
 using ReusableLibrary.QualityAssurance.Profiling;
 using ReusableLibrary.Supplemental.Collections;
@@ -9,16 +10,16 @@ using Xunit.Extensions;
 
 namespace ReusableLibrary.Memcached.Tests
 {
-    public abstract class CacheClientProfilingTest : AbstractProfilingTest<CacheClientContext>
+    public abstract class AbstractCacheClientProfilingTest : AbstractProfilingTest<CacheClientContext>
     {
         public const int SamplesCount = 5000;
 
         private static readonly IEnumerable<object[]> g_threads = (new[] { 2 }).ToPropertyData();
 
         private readonly TextWriter m_logger = System.Console.Out;
-        private readonly Func<CacheClientContext, CacheClientTest> m_testFactory;
+        private readonly Func<CacheClientContext, AbstractCacheClientTest> m_testFactory;
 
-        protected CacheClientProfilingTest(Func<CacheClientContext, CacheClientTest> testFactory)
+        protected AbstractCacheClientProfilingTest(Func<CacheClientContext, AbstractCacheClientTest> testFactory)
         {
             m_testFactory = testFactory;
         }
@@ -176,32 +177,6 @@ namespace ReusableLibrary.Memcached.Tests
         {
             var test = m_testFactory(context);
             return test.Remove_KeyNotFound;
-        }
-
-        public sealed class Text : CacheClientProfilingTest
-        {
-            public Text()
-                : base((CacheClientContext context) => 
-                {
-                    var test = new CacheClientTest.Text();
-                    test.SetFixture(context);
-                    return test;
-                })
-            {
-            }
-        }
-
-        public sealed class Binary : CacheClientProfilingTest
-        {
-            public Binary()
-                : base((CacheClientContext context) =>
-                {
-                    var test = new CacheClientTest.Binary();
-                    test.SetFixture(context);
-                    return test;
-                })
-            {
-            }
         }
     }
 }

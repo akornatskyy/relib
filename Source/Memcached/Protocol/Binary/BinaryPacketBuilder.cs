@@ -7,7 +7,7 @@ namespace ReusableLibrary.Memcached.Protocol
 {
     public sealed class BinaryPacketBuilder : IPacketBuilder
     {
-        private class Offset
+        private static class Offset
         {
             internal const int StartOfHeader = 0;
             internal const int OperationCode = 1;

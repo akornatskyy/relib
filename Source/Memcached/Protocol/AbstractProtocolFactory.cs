@@ -14,7 +14,7 @@ namespace ReusableLibrary.Memcached.Protocol
         private readonly object m_sync = new object();
         private readonly IPool<IProtocol> m_pool;
 
-        public AbstractProtocolFactory(string name, IClientFactory clientFactory, ProtocolOptions options)
+        protected AbstractProtocolFactory(string name, IClientFactory clientFactory, ProtocolOptions options)
         {
             m_client = clientFactory.Client();
             m_options = options;

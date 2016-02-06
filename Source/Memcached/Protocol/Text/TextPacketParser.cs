@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Text;
+
 using ReusableLibrary.Abstractions.IO;
 using ReusableLibrary.Abstractions.Models;
 
@@ -136,6 +138,7 @@ namespace ReusableLibrary.Memcached.Protocol
 
         public ArraySegment<byte> ReadValue(int length)
         {
+            Trace.Assert(length <= Int32.MaxValue - 2);
             m_buffer.EnsureCapacity(length + 2);
             BinaryReaderHelper.ReadTo(m_reader, m_buffer.Array, 0, length + 2);
             return new ArraySegment<byte>(m_buffer.Array, 0, length);

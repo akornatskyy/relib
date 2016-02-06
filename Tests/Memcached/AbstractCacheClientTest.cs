@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using ReusableLibrary.Abstractions.Caching;
 using ReusableLibrary.Memcached.Tests.Infrastructure;
 using Xunit;
@@ -8,9 +9,9 @@ using Xunit.Extensions;
 
 namespace ReusableLibrary.Memcached.Tests
 {
-    public abstract class CacheClientTest
+    public abstract class AbstractCacheClientTest
     {
-        protected CacheClientTest()
+        protected AbstractCacheClientTest()
         {
         }
 
@@ -235,30 +236,6 @@ namespace ReusableLibrary.Memcached.Tests
 
             // Assert
             Assert.True(result);
-        }
-
-        public sealed class Text : CacheClientTest, IUseFixture<CacheClientContext>
-        {
-            #region IUseFixture<CacheClientContext> Members
-
-            public void SetFixture(CacheClientContext context)
-            {
-                Cache = context.CacheClientText();
-            }
-
-            #endregion
-        }
-
-        public sealed class Binary : CacheClientTest, IUseFixture<CacheClientContext>
-        {
-            #region IUseFixture<CacheClientContext> Members
-
-            public void SetFixture(CacheClientContext context)
-            {
-                Cache = context.CacheClientBinary();
-            }
-
-            #endregion
         }
     }
 }
